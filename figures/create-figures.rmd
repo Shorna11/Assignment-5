@@ -1,0 +1,62 @@
+---
+title: "Assignment 5"
+Author: Sabikunnahar Shorna
+output:
+  word_document: default
+  pdf_document: default
+---
+
+
+### Creating figures
+
+The assignment is about creating an expository figure from an initial exploratory figure. The data used came from FSAdata package. 
+
+```{r, results = 'hide'}
+library(tidyverse)
+library(ggplot2)
+library(viridis)
+library(FSAdata)
+```
+
+### FSAdata
+
+```{r include = FALSE}
+FSAdata::SiscowetMI2004
+```
+
+```{r Data}
+head(SiscowetMI2004)
+```
+
+### Exploratory Plots
+
+We will explore the data by plotting lengths and weights
+```{r}
+SiscowetMI2004 %>%
+  ggplot(aes(x=len,
+             y=wgt)) +
+  geom_point()
+```
+
+### Expository Plots
+
+We will now create an expository figure. Here, we will also examine the locations with the fishes length and weight.
+
+```{r}
+SiscowetMI2004 %>%
+  ggplot(aes(x=len,
+             y=wgt,
+             color=locID)) +
+  geom_point() +
+  xlab("Total length (mm)") +
+  ylab("Weight (g)") +
+  labs(title = "Lengths and weights for male and female \n Siscowet Lake Trout captured at four locations \n in Michigan waters of Lake Superior",
+       color= "Locations") +
+  scale_color_viridis_d() +
+  theme_minimal() +
+  theme(plot.title.position = "panel",
+        axis.title.y = element_text(angle = 90, vjust = .8,size=12),
+        axis.text = element_text(size=12),
+        legend.position = c(.85, .8)) +
+  geom_smooth(method = "lm", se = FALSE)
+```

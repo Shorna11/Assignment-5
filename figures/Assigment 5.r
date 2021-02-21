@@ -1,12 +1,11 @@
 library(tidyverse)
-library(dplyr)
-library(FSAdata)
 library(ggplot2)
 library(viridis)
+library(FSAdata)
 
 FSAdata::SiscowetMI2004
 
-?SiscowetMI2004
+head(SiscowetMI2004)
 
 SiscowetMI2004 %>%
   ggplot(aes(x=len,
